@@ -45,7 +45,7 @@ pipeline {
       steps {
         sh '''#!/bin/bash -el
           sed -i "s/latest/${GIT_COMMIT}/g" helm/Deployment.yaml
-          kubectl apply -f helm/Deployment.yaml --force --wait --timeout=60s
+          kubectl wait -f helm/Deployment.yaml --for condition=available
         '''
       }
     }
